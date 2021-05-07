@@ -1,8 +1,84 @@
+import axios from 'axios';
+
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+// console.log("check out axios: \n \n", axios);
+
+// DRY
+// Don't Repeat Yourself
+// Duplicate code takes more up memory and time to execute
+
+const insertionPoint = document.querySelector(".cards")
+
+axios
+.get("https://api.github.com/users/manny-glez")
+.then(response => {
+  insertionPoint.appendChild(cardMaker(response.data))
+})
+.catch(err => console.log(err))
+
+axios
+.get("https://api.github.com/users/beejjorgensen")
+.then(response => {
+  insertionPoint.appendChild(cardMaker(response.data))
+})
+.catch(err => console.log(err))
+
+axios
+.get("https://api.github.com/users/ladrillo")
+.then(response => {
+  insertionPoint.appendChild(cardMaker(response.data))
+})
+.catch(err => console.log(err))
+
+axios
+.get("https://api.github.com/users/bigknell")
+.then(response => {
+  insertionPoint.appendChild(cardMaker(response.data))
+})
+.catch(err => console.log(err))
+
+axios
+.get("https://api.github.com/users/decagondev")
+.then(response => {
+  insertionPoint.appendChild(cardMaker(response.data))
+})
+.catch(err => console.log(err))
+
+axios
+.get("https://api.github.com/users/jrmmba8314")
+.then(response => {
+  insertionPoint.appendChild(cardMaker(response.data))
+})
+.catch(err => console.log(err))
+
+axios
+.get("https://api.github.com/users/josh-jacobson")
+.then(response => {
+  insertionPoint.appendChild(cardMaker(response.data))
+})
+.catch(err => console.log(err))
+
+axios
+.get("https://api.github.com/users/dustinmyers")
+.then(response => {
+  insertionPoint.appendChild(cardMaker(response.data))
+})
+.catch(err => console.log(err))
+
+axios
+.get("https://api.github.com/users/tetondan")
+.then(response => {
+  insertionPoint.appendChild(cardMaker(response.data))
+})
+.catch(err => console.log(err))
+
+
+
+
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -28,27 +104,79 @@
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = []
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
     Using DOM methods and properties, create and return the following markup:
 
-    <div class="card">
-      <img src={image url of user} />
-      <div class="card-info">
-        <h3 class="name">{users name}</h3>
-        <p class="username">{users user name}</p>
-        <p>Location: {users location}</p>
-        <p>Profile:
-          <a href={address to users github page}>{address to users github page}</a>
+    <div class="card"> ✅
+      <img src={image url of user} /> ✅
+      <div class="card-info"> ✅
+        <h3 class="name">{users name}</h3> ✅
+        <p class="username">{users user name}</p> ✅
+        <p>Location: {users location}</p> ✅
+        <p>Profile: ✅
+          <a href={address to users github page}>{address to users github page}</a> ✅
         </p>
-        <p>Followers: {users followers count}</p>
-        <p>Following: {users following count}</p>
-        <p>Bio: {users bio}</p>
+        <p>Followers: {users followers count}</p> ✅
+        <p>Following: {users following count}</p> ✅
+        <p>Bio: {users bio}</p> ✅
       </div>
     </div>
 */
+
+function cardMaker(userObj) {
+  // creation of elements
+  const card = document.createElement("div");
+  const avatar = document.createElement("img");
+  const cardInfo = document.createElement("div");
+  const name = document.createElement("h3");
+  const username = document.createElement("p");
+  const location = document.createElement("p");
+  const profile = document.createElement("p");
+  const link = document.createElement("a");
+  const followers = document.createElement("p");
+  const following = document.createElement("p");
+  const bio = document.createElement("p");
+
+  // Giving elements classes
+  card.className = "card";
+  cardInfo.className = "card-info";
+  name.className = "name";
+  username.className = "username";
+
+  // Giving elements content
+  avatar.src = userObj.avatar_url;
+  name.textContent = userObj.name;
+  username.textContent = userObj.login;
+  location.textContent = `Location: ${userObj.location}`
+  profile.textContent = "Profile:";
+  link.href = userObj.html_url;
+  link.textContent = "GitHub"
+  followers.textContent = `Followers: ${userObj.followers}`
+  following.textContent = `Following: ${userObj.following}`
+  bio.textContent = `Bio: ${userObj.bio}`
+
+  // Appending elements together
+  card.appendChild(avatar);
+  card.appendChild(cardInfo);
+
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(username);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+
+  profile.appendChild(link);
+
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+
+  return card
+}
+
+
 
 /*
   List of LS Instructors Github username's:
